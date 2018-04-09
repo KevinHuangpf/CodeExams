@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-//lianjia
+//lianjiaWeb
 public class Main4 {
     public static void main(String[] args) {
         //输入
