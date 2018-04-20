@@ -1,6 +1,7 @@
 //jd
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main8 {
@@ -10,6 +11,7 @@ public class Main8 {
         System.out.print("input:");
         String value=scanner.next();
         scanner.close();
+
 
 
         char[] ar = value.toCharArray();
