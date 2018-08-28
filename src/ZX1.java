@@ -1,10 +1,18 @@
 import java.util.*;
 
-//输入：network = 111110000010000
-//输出： [3,2,4,3,3,4]
+/** 中兴通讯2018秋招笔试题目1:输出每个工程师层级顺序的最小信号强度
+ * @author  KevinHuang
+ * @date 2018/8/28
+ * @version 1.0
+ *
+ * */
+//intput：network = 111110000010000
+//output： [3,2,4,3,3,4]
 
 public class ZX1 {
     public static void main(String[] args) {
+
+        //完成输入
         Scanner sc = new Scanner(System.in);
         String[] strings = sc.nextLine().split(" ");
         String zeroOnes = strings[strings.length-1];
@@ -15,13 +23,14 @@ public class ZX1 {
             }
         }
 
+        //建立二叉树
         ZX1 m=new ZX1();
         Node aRoot=m.createTree(array);
         ArrayList<Integer> arrayList = new ArrayList<>();
         LinkedList<Node> laywerNode = LaywerTraversal(aRoot);
 
 
-
+        //寻找当前节点的最远节点并添加到数组
         for(int i=0;i<laywerNode.size();i++){
             int disMax =0;
             for (int j = 0; j < laywerNode.size(); j++) {
@@ -32,10 +41,12 @@ public class ZX1 {
             arrayList.add(disMax);
         }
 
+        //输出结果
         System.out.println(arrayList);
 
     }
 
+    //层次遍历二叉树
     public static LinkedList<Node> LaywerTraversal(Node root){
         if(root==null) return null;
         LinkedList<Node> res= new LinkedList<>();
@@ -60,6 +71,7 @@ public class ZX1 {
 
 
 
+    //根据01字符串建立二叉树
     public Node createTree(int[] data){
         List<Node> nodeList=new ArrayList<Node>();
         for(int each:data){
@@ -89,8 +101,20 @@ public class ZX1 {
         return root;
     }
 
-    //返回node节点在root中的第几层，-1表示没有在root子树下找到
 
+    //求任意节点之间的距离
+    public static int distanceNodes(Node root,int node1, int node2) {
+
+        Node lca = findLCA(root, node1, node2);
+        int dis_lca = findLevel(root, lca.data);
+        int dis1 = findLevel(root, node1);
+        int dis2 = findLevel(root, node2);
+        return dis1 + dis2 - 2 * dis_lca;
+
+
+    }
+
+    //返回node节点在root中的第几层，-1表示没有在root子树下找到
     public static int findLevel(Node root, int node) {
         if (root == null) return -1;
         if (root.data == node) return 0;
@@ -107,7 +131,7 @@ public class ZX1 {
 
     }
 
-
+    //确定距离
     public static Node findLCA(Node root, int node1, int node2) {
 
         if (root == null) return null;
@@ -129,30 +153,20 @@ public class ZX1 {
     }
 
 
-    public static int distanceNodes(Node root,int node1, int node2) {
-        Node lca = findLCA(root, node1, node2);
-        int dis_lca = findLevel(root, lca.data);
-        int dis1 = findLevel(root, node1);
-        int dis2 = findLevel(root, node2);
-        return dis1 + dis2 - 2 * dis_lca;
 
-    }
-
-
+    //二叉树的定义
     class Node{
         private int data;
         private Node left;
         private Node right;
-        private int maxLeftLen;//the max length of leftTree
-        private int maxRightLen;
 
         public Node(int i){
             data=i;
         }
+
         public int getData() {
             return data;
         }
-
 
         public void setLeft(Node left) {
             this.left = left;
