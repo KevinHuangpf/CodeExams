@@ -28,5 +28,8 @@ public class Main21 {
             System.out.print(intArr[i]+",");
         }
         System.out.print(intArr[intArr.length-1]);
+
+        System.gc();
+
     }
 }
